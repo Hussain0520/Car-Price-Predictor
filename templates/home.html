@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Price Prediction</title>
+    <style>
+body, html {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.bg-img {
+  /* The image used */
+  background-image: url("static/img.jpeg");
+
+  /* Control the height of the image */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+/* Add styles to the form container */
+.container {
+  position: absolute;
+  right: 0;
+  margin: 20px;
+  max-width: 300px;
+  padding: 16px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+  input,select{
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+input:focus, select:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit button */
+.btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+<div class="bg-img">
+  <form action="{{ url_for('predict')}}" method="post" class="container">
+    <h2>Car Price Predictor</h2>
+
+    <label><b>Year</b></label>
+    <input type="number" placeholder="Enter Year" name="Year">
+      <label><b>What is the Showroom Price?(In lakhs)</b></label>
+    <input type="number" placeholder="Enter Showroom  price" name="Present_Price" required="required">
+      <label><b>How Many Kilometers Drived?</b></label>
+    <input type="number" placeholder="Enter Kms driven" name="Kms_Driven" required="required">
+      <label><b>Number of previous Owner's (0 or 1 or 2) ?</b></label>
+    <input type="number" placeholder="Enter Number of Previous owner's" name="Owner" required="required">
+      <label><b>What Is the Fuel type?</b></label>
+      <select name="Fuel_Type_Petrol"  required="required">
+                <option value="Petrol">Petrol</option>
+                <option value="Diesel">Diesel</option>
+      </select>
+      <label><b>Are you A Dealer or Individual</b></label>
+      <select name="Seller_Type_Individual" required="required">
+                <option value="Dealer">Dealer</option>
+                <option value="Individual">Individual</option>
+      </select>
+      <label><b>Transmission type</b></label>
+      <select name="Transmission_Mannual" required="required">
+                <option value="Mannual">Manual Car</option>
+                <option value="Automatic">Automatic Car</option>
+      </select>
+    <button type="submit" class="btn">Calculate the Selling Price</button>
+  </form>
+    <br><br><h3>{{ prediction_text }}</h3>
+</div>
+<br><br><center><h1>{{ prediction_text }}</h1></center>
+</body>
+</html>
